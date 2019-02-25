@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Ghost
+GenericName=Hosts Editor
+Comment=Easily manage your hosts file
+Categories=Utility;Development;
+Exec=com.github.matej-marcisovsky.ghost
+Icon=application-default-icon
+Terminal=false
+Type=Application
+Keywords=hosts;etc;

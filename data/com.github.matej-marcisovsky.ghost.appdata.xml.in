@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+    <id>com.github.matej-marcisovsky.ghost</id>
+    <metadata_license>GPLv3</metadata_license>
+    <name>Ghost</name>
+    <summary>Easily manage your hosts file</summary>
+    <description>
+        <p>Edit, add, remove or toggle your records on /etc/hosts file.</p>
+    </description>
+</component>
