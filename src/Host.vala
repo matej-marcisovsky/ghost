@@ -1,25 +1,35 @@
-const string COMMENT_CHAR = "#";
+private const string COMMENT_CHAR = "#";
 
 public errordomain HostError {
-    INVALID_IP,
-    INVALID_STRING
+    IP_ADDRESS,
+    SOURCE_STRING
 }
 
 public class Host {
+    private bool _active;
+
     private string _ip;
 
-    public bool active { get; set; default = false; }
+    public bool active {
+        get {
+            return this._active &&
+                this.ip.length > 0 &&
+                this.hostname.length > 0;
+        }
+        set {
+            this._active = value;
+        }
+        default = false;
+    }
 
     public string ip {
         get {
             return this._ip;
         }
         set {
-            if (!Host.is_valid_ip (value)) {
-                throw new HostError.INVALID_IP("Invalid IP adress.");
+            if (Host.is_valid_ip (value)) {
+                this._ip = value;
             }
-
-            this._ip = value;
         }
         default = "127.0.0.1";
     }
@@ -37,9 +47,9 @@ public class Host {
         this.active = active;
     }
 
-    public Host.from_string (string text) {
+    public Host.from_string (string text) throws HostError {
         if (text.length == 0) {
-            throw new HostError.INVALID_STRING("Source string is empty or in invalid format.");
+            throw new HostError.SOURCE_STRING(_("Source string is empty."));
         }
 
         string text_stripped = text.strip ();
@@ -53,7 +63,7 @@ public class Host {
 
         string[] text_parts = text_stripped.split_set (" \t", 2);
         if (text_parts.length != 2) {
-            throw new HostError.INVALID_STRING("Source string is empty or in invalid format.");
+            throw new HostError.SOURCE_STRING(_("Source string is invalid."));
         }
 
         this(text_parts[0], text_parts[1], active);

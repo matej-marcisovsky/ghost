@@ -12,7 +12,8 @@ executable(
     meson.project_name(),
     [
         'src/Ghost.vala',
-        'src/Host.vala'
+        'src/Host.vala',
+        'src/Hosts.vala'
     ],
     dependencies: [
         dependency('gtk+-3.0')
