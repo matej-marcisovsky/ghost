@@ -11,7 +11,18 @@ add_global_arguments('-DGETTEXT_PACKAGE="@0@"'.format (meson.project_name()), la
 executable(
     meson.project_name(),
     [
-        'src/Ghost.vala',
+        'src/Application-pkexec.vala'
+    ],
+    dependencies: [
+        dependency('gtk+-3.0')
+    ],
+    install: true
+)
+executable(
+    meson.project_name() + '.app',
+    [
+        'src/Application.vala',
+        'src/MainWindow.vala',
         'src/Host.vala',
         'src/Hosts.vala'
     ],
@@ -38,6 +49,15 @@ i18n.merge_file(
     po_dir: join_paths(meson.source_root(), 'po'),
     install: true,
     install_dir: join_paths(get_option('datadir'), 'metainfo')
+)
+
+#Translate and install our .appdata file
+i18n.merge_file(
+    input: join_paths('data', meson.project_name() + '.pkexec.policy.in'),
+    output: meson.project_name() + '.pkexec.policy',
+    po_dir: join_paths(meson.source_root(), 'po'),
+    install: true,
+    install_dir: join_paths(get_option('datadir'), 'polkit-1/actions')
 )
 
 subdir('po')
