@@ -22,11 +22,14 @@ executable(
     meson.project_name() + '.app',
     [
         'src/Application.vala',
-        'src/MainWindow.vala',
         'src/Host.vala',
-        'src/Hosts.vala'
+        'src/Hosts.vala',
+        'src/Widgets/HeaderBar.vala',
+        'src/Widgets/MainWindow.vala'
     ],
     dependencies: [
+        dependency('glib-2.0'),
+        dependency('granite', version: '>=5.1.0'),
         dependency('gtk+-3.0')
     ],
     install: true

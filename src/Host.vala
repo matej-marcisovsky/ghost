@@ -9,39 +9,41 @@ namespace Ghost {
     public class Host {
         private bool _active;
 
-        private string _ip;
+        private string _ip_address = "";
 
         public bool active {
             get {
                 return this._active && this.is_valid ();
             }
+
             set {
                 this._active = value;
             }
+
             default = false;
         }
 
-        public string ip {
+        public string ip_address {
             get {
-                return this._ip;
+                return this._ip_address;
             }
+
             set {
-                if (Host.is_valid_ip (value)) {
-                    this._ip = value;
+                if (Host.is_valid_ip_address (value)) {
+                    this._ip_address = value;
                 }
             }
-            default = "127.0.0.1";
         }
 
-        public string hostname { get; set; default = "localhost"; }
+        public string hostname { get; set; }
 
-        public static bool is_valid_ip (string ip) {
+        public static bool is_valid_ip_address (string ip_address) {
             /* Tests if hostname is the string form of an IPv4 or IPv6 address. */
-            return GLib.Hostname.is_ip_address (ip);
+            return GLib.Hostname.is_ip_address (ip_address);
         }
 
-        public Host (string ip, string hostname, bool active = false) {
-            this.ip = ip.strip ();
+        public Host (string ip_address, string hostname, bool active = false) {
+            this.ip_address = ip_address.strip ();
             this.hostname = hostname.strip ();
             this.active = active;
         }
@@ -70,8 +72,8 @@ namespace Ghost {
 
         public bool is_valid () {
             if (
-                this.ip != null &&
-                this.ip.length > 0 &&
+                this.ip_address != null &&
+                this.ip_address.length > 0 &&
                 this.hostname != null &&
                 this.hostname.length > 0
             ) {
@@ -82,7 +84,7 @@ namespace Ghost {
         }
 
         public string to_string () {
-            return (this.active ? "" : COMMENT_CHAR) + this.ip + " " + this.hostname;
+            return (this.active ? "" : COMMENT_CHAR) + this.ip_address + " " + this.hostname;
         }
     }
 }
