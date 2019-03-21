@@ -70,7 +70,11 @@ namespace Ghost {
             if (host == null) {
                 GLib.warning ("Host not found at index %d".printf (index));
             } else {
-                host.ip_address = new_ip_address;
+                try {
+                    host.change_ip_address (new_ip_address);
+                } catch (HostError error) {
+                    this.show_warn_dialog (error);
+                }
                 this.apply_changes ();
             }
         }
@@ -81,7 +85,11 @@ namespace Ghost {
             if (host == null) {
                 GLib.warning ("Host not found at index %d".printf (index));
             } else {
-                host.hostname = new_hostname;
+                try {
+                    host.change_hostname (new_hostname);
+                } catch (HostError error) {
+                    this.show_warn_dialog (error);
+                }
                 this.apply_changes ();
             }
         }
@@ -91,11 +99,37 @@ namespace Ghost {
             this.main_window.refill_list_store ();
         }
 
+        private void show_error_dialog (Error error) {
+            Granite.MessageDialog error_dialog = new Granite.MessageDialog.with_image_from_icon_name (
+                    _("Something broke!"),
+                    error.message,
+                    "dialog-error",
+                    Gtk.ButtonsType.CLOSE
+                );
+
+                error_dialog.set_transient_for (this.main_window);
+                error_dialog.run ();
+                error_dialog.destroy ();
+        }
+
+        private void show_warn_dialog (Error error) {
+            Granite.MessageDialog warn_dialog = new Granite.MessageDialog.with_image_from_icon_name (
+                    _("Whoops!"),
+                    error.message,
+                    "dialog-warning",
+                    Gtk.ButtonsType.CLOSE
+                );
+
+                warn_dialog.set_transient_for (this.main_window);
+                warn_dialog.run ();
+                warn_dialog.destroy ();
+        }
+
         private void read_hosts () {
             try {
                 this.hosts.read_file ();
             } catch (HostsError error) {
-                GLib.error (error.message);
+                this.show_error_dialog (error);
             }
         }
 
@@ -103,7 +137,7 @@ namespace Ghost {
             try {
                 this.hosts.write_file ();
             } catch (HostsError error) {
-                GLib.error (error.message);
+                this.show_error_dialog (error);
             }
         }
     }

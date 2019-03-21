@@ -7,28 +7,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.matej-marcisovsky.ghost\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 16:45+0100\n"
+"POT-Creation-Date: 2019-03-21 15:21+0100\n"
 "PO-Revision-Date: 2019-02-25 16:44+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: data/com.github.matej-marcisovsky.ghost.desktop.in:3
 #: data/com.github.matej-marcisovsky.ghost.appdata.xml.in:5
+#: data/com.github.matej-marcisovsky.ghost.desktop.in:3
 msgid "Ghost"
+msgstr ""
+
+#: data/com.github.matej-marcisovsky.ghost.appdata.xml.in:6
+#: data/com.github.matej-marcisovsky.ghost.desktop.in:5
+msgid "Easily manage your hosts file"
+msgstr ""
+
+#: data/com.github.matej-marcisovsky.ghost.appdata.xml.in:8
+msgid "Edit, add, remove or toggle your records on /etc/hosts file."
 msgstr ""
 
 #: data/com.github.matej-marcisovsky.ghost.desktop.in:4
 msgid "Hosts Editor"
-msgstr ""
-
-#: data/com.github.matej-marcisovsky.ghost.desktop.in:5
-#: data/com.github.matej-marcisovsky.ghost.appdata.xml.in:6
-msgid "Easily manage your hosts file"
 msgstr ""
 
 #: data/com.github.matej-marcisovsky.ghost.desktop.in:8
@@ -39,6 +43,53 @@ msgstr ""
 msgid "hosts;etc;"
 msgstr ""
 
-#: data/com.github.matej-marcisovsky.ghost.appdata.xml.in:8
-msgid "Edit, add, remove or toggle your records on /etc/hosts file."
+#: src/Application.vala:104
+msgid "Something broke!"
+msgstr "Něco se pokazilo!"
+
+#: src/Application.vala:117
+msgid "Whoops!"
+msgstr "Jejda!"
+
+#: src/Host.vala:49
+msgid "Source string is empty."
+msgstr ""
+
+#: src/Host.vala:63
+msgid "Source string is invalid."
+msgstr ""
+
+#: src/Host.vala:86
+msgid "Invalid format of IP address."
+msgstr "Nevalidní IP adresa."
+
+#: src/Host.vala:94
+msgid "Invalid format of hostname."
+msgstr "Nevalidní hostname."
+
+#: src/Hosts.vala:36
+#, c-format
+msgid "Unable to open %s: %s"
+msgstr "Nelze otevřít soubor %s: %s"
+
+#: src/Hosts.vala:53
+#, c-format
+msgid "Invalid line in hosts file: %s"
+msgstr ""
+
+#: src/Hosts.vala:79
+#, c-format
+msgid "Unable to write %s: %s"
+msgstr "Nelze zapisovat do souboru %s: %s"
+
+#: src/Widgets/MainWindow.vala:119
+msgid "Active"
+msgstr "Aktivní"
+
+#: src/Widgets/MainWindow.vala:120
+msgid "IP Address"
+msgstr "IP Adresa"
+
+#: src/Widgets/MainWindow.vala:121
+msgid "Hostname"
 msgstr ""

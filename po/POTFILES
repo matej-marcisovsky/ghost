@@ -1,3 +1,7 @@
-src/Ghost.vala
-data/com.github.matej-marcisovsky.ghost.desktop.in
 data/com.github.matej-marcisovsky.ghost.appdata.xml.in
+data/com.github.matej-marcisovsky.ghost.desktop.in
+src/Application.vala
+src/Host.vala
+src/Hosts.vala
+src/Widgets/HeaderBar.vala
+src/Widgets/MainWindow.vala

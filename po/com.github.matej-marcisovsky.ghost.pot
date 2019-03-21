@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: com.github.matej-marcisovsky.ghost\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 16:45+0100\n"
+"POT-Creation-Date: 2019-03-21 15:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,18 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/com.github.matej-marcisovsky.ghost.desktop.in:3
 #: data/com.github.matej-marcisovsky.ghost.appdata.xml.in:5
+#: data/com.github.matej-marcisovsky.ghost.desktop.in:3
 msgid "Ghost"
+msgstr ""
+
+#: data/com.github.matej-marcisovsky.ghost.appdata.xml.in:6
+#: data/com.github.matej-marcisovsky.ghost.desktop.in:5
+msgid "Easily manage your hosts file"
+msgstr ""
+
+#: data/com.github.matej-marcisovsky.ghost.appdata.xml.in:8
+msgid "Edit, add, remove or toggle your records on /etc/hosts file."
 msgstr ""
 
 #: data/com.github.matej-marcisovsky.ghost.desktop.in:4
 msgid "Hosts Editor"
-msgstr ""
-
-#: data/com.github.matej-marcisovsky.ghost.desktop.in:5
-#: data/com.github.matej-marcisovsky.ghost.appdata.xml.in:6
-msgid "Easily manage your hosts file"
 msgstr ""
 
 #: data/com.github.matej-marcisovsky.ghost.desktop.in:8
@@ -39,6 +43,53 @@ msgstr ""
 msgid "hosts;etc;"
 msgstr ""
 
-#: data/com.github.matej-marcisovsky.ghost.appdata.xml.in:8
-msgid "Edit, add, remove or toggle your records on /etc/hosts file."
+#: src/Application.vala:104
+msgid "Something broke!"
+msgstr ""
+
+#: src/Application.vala:117
+msgid "Whoops!"
+msgstr ""
+
+#: src/Host.vala:49
+msgid "Source string is empty."
+msgstr ""
+
+#: src/Host.vala:63
+msgid "Source string is invalid."
+msgstr ""
+
+#: src/Host.vala:86
+msgid "Invalid format of IP address."
+msgstr ""
+
+#: src/Host.vala:94
+msgid "Invalid format of hostname."
+msgstr ""
+
+#: src/Hosts.vala:36
+#, c-format
+msgid "Unable to open %s: %s"
+msgstr ""
+
+#: src/Hosts.vala:53
+#, c-format
+msgid "Invalid line in hosts file: %s"
+msgstr ""
+
+#: src/Hosts.vala:79
+#, c-format
+msgid "Unable to write %s: %s"
+msgstr ""
+
+#: src/Widgets/MainWindow.vala:119
+msgid "Active"
+msgstr ""
+
+#: src/Widgets/MainWindow.vala:120
+msgid "IP Address"
+msgstr ""
+
+#: src/Widgets/MainWindow.vala:121
+msgid "Hostname"
 msgstr ""
