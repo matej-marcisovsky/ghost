@@ -7,6 +7,8 @@ namespace Ghost {
         COUNT
     }
 
+    private const string HOSTS_FILE_PATH = "/etc/hosts";
+
     public class Application : Gtk.Application {
         public Hosts hosts { get; construct; }
 
@@ -16,7 +18,7 @@ namespace Ghost {
             Object (
                 application_id: "com.github.matej-marcisovsky.ghost",
                 flags: ApplicationFlags.FLAGS_NONE,
-                hosts: new Hosts ()
+                hosts: new Hosts (HOSTS_FILE_PATH)
             );
         }
 
@@ -43,8 +45,8 @@ namespace Ghost {
         }
 
         private void apply_changes () {
-            //  this.write_hosts ();
-            //  this.read_hosts ();
+            this.write_hosts ();
+            this.read_hosts ();
             this.main_window.refill_list_store ();
         }
 
@@ -54,8 +56,13 @@ namespace Ghost {
             if (host == null) {
                 GLib.warning ("Host not found at index %d".printf (index));
             } else {
-                host.active = active;
-                this.apply_changes ();
+                try {
+                    host.change_active (active);
+
+                    this.apply_changes ();
+                } catch (HostError error) {
+                    this.show_warn_dialog (error);
+                }
             }
         }
 
@@ -72,10 +79,11 @@ namespace Ghost {
             } else {
                 try {
                     host.change_ip_address (new_ip_address);
+
+                    this.apply_changes ();
                 } catch (HostError error) {
                     this.show_warn_dialog (error);
                 }
-                this.apply_changes ();
             }
         }
 
@@ -87,10 +95,11 @@ namespace Ghost {
             } else {
                 try {
                     host.change_hostname (new_hostname);
+
+                    this.apply_changes ();
                 } catch (HostError error) {
                     this.show_warn_dialog (error);
                 }
-                this.apply_changes ();
             }
         }
 

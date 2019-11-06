@@ -1,6 +1,4 @@
 namespace Ghost {
-    private const string HOSTS_FILE_PATH = "/etc/hosts";
-
     private const string NEW_LINE = "\n";
 
     public errordomain HostsError {
@@ -9,9 +7,12 @@ namespace Ghost {
     }
 
     public class Hosts {
+        private string hosts_file_path;
+
         public GLib.Array<Host> hosts;
 
-        public Hosts () {
+        public Hosts (string hosts_file_path) {
+            this.hosts_file_path = hosts_file_path;
             this.hosts = new GLib.Array<Host> ();
         }
 
@@ -31,9 +32,9 @@ namespace Ghost {
             string contents = "";
 
             try {
-                GLib.FileUtils.get_contents (HOSTS_FILE_PATH, out contents);
+                GLib.FileUtils.get_contents (this.hosts_file_path, out contents);
             } catch (Error error) {
-                throw new HostsError.HOSTS_FILE (_("Unable to open %s: %s".printf (HOSTS_FILE_PATH, error.message)));
+                throw new HostsError.HOSTS_FILE (_("Unable to open %s: %s".printf (this.hosts_file_path, error.message)));
             }
 
             if (contents.length == 0) {
@@ -45,13 +46,7 @@ namespace Ghost {
 
             foreach (unowned string line in lines) {
                 try {
-                    Host host = new Host.from_string (line);
-
-                    if (host.is_valid ()) {
-                        this.hosts.append_val (host);
-                    } else {
-                        throw new HostsError.INVALID_LINE (_("Invalid line in hosts file: %s".printf (line)));
-                    }
+                    this.hosts.append_val (new Host.from_string (line));
                 } catch (Error error) {
                     GLib.debug (error.message);
                 }
@@ -74,9 +69,9 @@ namespace Ghost {
             }
 
             try {
-                GLib.FileUtils.set_contents (HOSTS_FILE_PATH, contents);
+                GLib.FileUtils.set_contents (this.hosts_file_path, contents);
             } catch (Error error) {
-                throw new HostsError.HOSTS_FILE (_("Unable to write %s: %s".printf (HOSTS_FILE_PATH, error.message)));
+                throw new HostsError.HOSTS_FILE (_("Unable to write %s: %s".printf (this.hosts_file_path, error.message)));
             }
         }
     }

@@ -5,6 +5,7 @@ namespace Ghost {
     private const string HOSTNAME_REGEX = """^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$""";
 
     public errordomain HostError {
+        ACTIVE,
         IP_ADDRESS,
         HOSTNAME,
         SOURCE_STRING
@@ -18,7 +19,7 @@ namespace Ghost {
                 return this._active && this.is_valid ();
             }
 
-            set {
+            private set {
                 this._active = value;
             }
 
@@ -58,12 +59,24 @@ namespace Ghost {
                 text_stripped = text_stripped.strip ();
             }
 
+            string ip_address = "";
+            string hostname = "";
             string[] text_parts = text_stripped.split_set (" \t", 2);
-            if (text_parts.length != 2) {
-                throw new HostError.SOURCE_STRING(_("Source string is invalid."));
+
+            if (text_parts.length == 2) {
+                ip_address = text_parts[0];
+                hostname = text_parts[1];
+            } else if (text_parts.length == 1) {
+                string text_part = text_parts[0];
+
+                if (Host.is_valid_ip_address (text_part)) {
+                    ip_address = text_part;
+                } else if (Host.is_valid_hostname (text_part)) {
+                    hostname = text_part;
+                }
             }
 
-            this(text_parts[0], text_parts[1], active);
+            this(ip_address, hostname, active);
         }
 
         public bool is_valid () {
@@ -77,6 +90,14 @@ namespace Ghost {
             }
 
             return false;
+        }
+
+        public void change_active (bool active) throws HostError {
+            if (this.is_valid ()) {
+                this.active = active;
+            } else {
+                throw new HostError.ACTIVE(_("Missing required attributes."));
+            }
         }
 
         public void change_ip_address (string ip_address) throws HostError {
